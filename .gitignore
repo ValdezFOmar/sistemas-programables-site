@@ -1,3 +1,6 @@
+# rbenv local version
+.ruby-version
+
 # Bundler cache
 .bundle
 vendor
