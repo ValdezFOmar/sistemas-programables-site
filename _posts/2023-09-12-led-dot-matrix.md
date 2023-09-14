@@ -36,7 +36,121 @@ LED al mismo tiempo. Las columnas cambian tan rápido (cientos o miles
 de veces por segundo) que el ojo humano percibe la pantalla como
 completamente iluminada.
 
+Para activar un LED específico, solo se necesita aplicar un voltaje
+positivo a la fila respectiva de ese punto y negativo o tierra a la
+columna respectiva de ese punto. Si la fila obtiene un voltaje positivo
+y la columna se vuelve negativa, entonces solo se iluminará un LED en particular.
+
+
+## Integrar con Raspberry Pi Pico
+
+### Conexiones
+
+Para poder utilizar la MAX7219 con una raspberr pi pico, será necesario realizar
+las siguientes conexiones en entre los puertos de los dispositivos:
+
+| Matriz LED MAX7219 | Raspberry Pi Pico
+| ------------------ | ------------------
+| VCC	               | VBUS (5V)
+| GND	               | GND
+| DIN	               | GP3 (SPI0_TX)
+| CS	               | GP5 (SPI0_CSn)
+| CLK	               | GP2 (SPI0_SCK)
+
+![Demostración de las conexiones entre los dispositivos](connection-diagram.png)
+_Demostración de las conexiones entre **raspeberry pi pico** y **MAX7219**[^dot-matrix-pico]_
+
+### Libreria
+
+Para poder controlar la MAX7219 será necesario hacer uso de la libreria
+**micropython-max7219**[^max7219-library]. Al obtener la libreria, esta se podrá
+importar de la siguiente manera:
+
+```python
+import max7219
+```
+
+Además, se necesitaran importar algunas librerias mas y realizar 
+ciertas configuraciones para poder comtrolar la matriz correctamente.
+La siguiente plantilla muestra un ejemplo de esto:
+
+```python
+from machine import Pin, SPI
+import max7219
+
+spi = SPI(0,sck=Pin(2),mosi=Pin(3))
+cs = Pin(5, Pin.OUT)
+
+# Ajustar por el numero de matrices conectadas
+num_matrices = 1
+display = max7219.Matrix8x8(spi, cs, num_matrices)
+
+display.brightness(10)
+```
+
+La configuración anterior inicializa la conexión entre los puerts/pines del
+respberry pico y de la MAX7219 para que se puedan comunicar. La variable `display`
+será la interfaz por la cual será posible interactuar (a travéz de metodos)
+con la matriz LED. Es importante destacar que se debe modificar el valor asignado
+a la varible `num_matrices` por el numero de matrices que se han conectado (en este
+caso, se asume que se ha conectado 1 matriz).
+
+### Ejemplo
+
+El siguientes script es un ejemplo funcional que dibuja una cara:
+
+```python
+import max7219
+from machine import SPI, Pin
+
+spi = SPI(0, sck=Pin(2), mosi=Pin(3))
+cs = Pin(5, Pin.OUT)
+
+num_matrices = 1
+display = max7219.Matrix8x8(spi, cs, num_matrices)
+
+display.brightness(10)
+
+face = [
+    (1, 1),
+    (1, 2),
+    (1, 5),
+    (1, 6),
+    (2, 1),
+    (2, 2),
+    (2, 5),
+    (2, 6),
+    (3, 3),
+    (3, 4),
+    (4, 2),
+    (4, 3),
+    (4, 4),
+    (4, 5),
+    (5, 2),
+    (5, 3),
+    (5, 4),
+    (5, 5),
+    (6, 2),
+    (6, 5),
+]
+
+while True:
+    for y, x in face:
+        display.pixel(x, y, 1)
+    display.show()
+```
+
+El codigo anterior genera el siguiente resultado:
+
+![Matris LED mostrando una cara](led-matrix-face.png){: width="300" height="300"}
+
+> Ejemplo disponible en [Wokwi](https://wokwi.com/projects/375825934873346049).
+{: .prompt-tip}
+
 
 ## Referencias
 
 [^dot-matrix-display]: [Interfacing MAX7219 LED Dot Matrix Display with Arduino](https://lastminuteengineers.com/max7219-dot-matrix-arduino-tutorial/)
+[^dot-matrix-pico]: [MAX7219 LED Dot Matrix Display with Raspberry Pi Pico](https://microcontrollerslab.com/max7219-led-dot-matrix-display-raspberry-pi-pico/)
+[^max7219-library]: [MicroPython Library for MAX7219 8x8 LED Matrix](https://github.com/mcauser/micropython-max7219)
+
