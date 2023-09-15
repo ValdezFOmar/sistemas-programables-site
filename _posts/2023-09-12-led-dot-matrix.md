@@ -47,7 +47,7 @@ y la columna se vuelve negativa, entonces solo se iluminará un LED en particula
 ### Conexiones
 
 Para poder utilizar la MAX7219 con una raspberr pi pico, será necesario realizar
-las siguientes conexiones en entre los puertos de los dispositivos:
+las siguientes conexiones entre los puertos de los dispositivos:
 
 | Matriz LED MAX7219 | Raspberry Pi Pico
 | ------------------ | ------------------
@@ -70,9 +70,9 @@ importar de la siguiente manera:
 import max7219
 ```
 
-Además, se necesitaran importar algunas librerias mas y realizar 
-ciertas configuraciones para poder comtrolar la matriz correctamente.
-La siguiente plantilla muestra un ejemplo de esto:
+Además, se necesitá importar algunas librerias mas y realizar 
+ciertas configuraciones para poder controlar la matriz correctamente.
+El siguiente codigo muestra como realizar una configuración basica:
 
 ```python
 from machine import Pin, SPI
@@ -88,14 +88,16 @@ display = max7219.Matrix8x8(spi, cs, num_matrices)
 display.brightness(10)
 ```
 
-La configuración anterior inicializa la conexión entre los puerts/pines del
-respberry pico y de la MAX7219 para que se puedan comunicar. La variable `display`
-será la interfaz por la cual será posible interactuar (a travéz de metodos)
-con la matriz LED. Es importante destacar que se debe modificar el valor asignado
-a la varible `num_matrices` por el numero de matrices que se han conectado (en este
-caso, se asume que se ha conectado 1 matriz).
+Este codigo realiza lo siguiente:
 
-### Ejemplo
+1. Importa las librerias y clases necesarias para trabajar.
+2. Inicializa la conexión entre los puertos/pines del respberry pi pico y de la MAX7219 para que se puedan comunicar.
+3. La varible `num_matrices` establece el numero de matrices que se han conectado (en este caso, se asume que se ha conectado 1 matriz).
+4. La variable `display` será la interfaz por la cual será posible interactuar (a travéz de metodos) con la matriz LED.
+5. Se ajusta el nivel de brillo de los LEDs.
+
+
+## Ejemplo
 
 El siguientes script es un ejemplo funcional que dibuja una cara:
 
