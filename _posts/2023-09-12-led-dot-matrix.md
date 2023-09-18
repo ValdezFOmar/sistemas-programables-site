@@ -104,6 +104,7 @@ El siguientes script es un ejemplo funcional que dibuja una cara:
 ```python
 import max7219
 from machine import SPI, Pin
+from time import sleep
 
 spi = SPI(0, sck=Pin(2), mosi=Pin(3))
 cs = Pin(5, Pin.OUT)
@@ -113,33 +114,58 @@ display = max7219.Matrix8x8(spi, cs, num_matrices)
 
 display.brightness(10)
 
-face = [
+
+class ImageLEDs:
+    def __init__(self, image, display):
+        self.image = image
+        self.display = display
+    
+    def set_display(self):
+        for x, y in self.image:
+            self.display.pixel(x, y, 1)
+    
+    def set_display_inverse(self):
+        for i in range(8):
+            for j in range(8):
+                if (i, j) in self.image:
+                    continue
+                self.display.pixel(i, j, 1)
+
+creeper = [
     (1, 1),
-    (1, 2),
-    (1, 5),
-    (1, 6),
     (2, 1),
+    (5, 1),
+    (6, 1),
+    (1, 2),
     (2, 2),
-    (2, 5),
-    (2, 6),
-    (3, 3),
-    (3, 4),
-    (4, 2),
-    (4, 3),
-    (4, 4),
-    (4, 5),
     (5, 2),
-    (5, 3),
-    (5, 4),
-    (5, 5),
     (6, 2),
-    (6, 5),
+    (3, 3),
+    (4, 3),
+    (2, 4),
+    (3, 4),
+    (4, 4),
+    (5, 4),
+    (2, 5),
+    (3, 5),
+    (4, 5),
+    (5, 5),
+    (2, 6),
+    (5, 6),
 ]
 
+creeper_image = ImageLEDs(creeper, display)
+
 while True:
-    for y, x in face:
-        display.pixel(x, y, 1)
+    display.fill(0)
+    creeper_image.set_display()
     display.show()
+    sleep(1)
+
+    display.fill(0)
+    creeper_image.set_display_inverse()
+    display.show()
+    sleep(1)
 ```
 
 El codigo anterior genera el siguiente resultado:
