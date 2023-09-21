@@ -18,17 +18,20 @@ sensores de fabrica de los que dispone el dispositivo.
 A continuación se presenta una tabla con los distintos sensores que Sensor Box permite
 interactuar, así como información detallada de cada sensor.
 
+> Haz clic en las capturas para hacer zoom.
+{: .prompt-tip }
+
 | Sensor       | Icono | Detecta     | ¿Detectado? | Captura       |
 | ------------ | :---: | ----------- | :---------: | ------------- |
-| Acelerometro |       | Dirección del dispositivo. | Sí | |
-| Luz          |       | Intensidad de la luz en el ambiente. | Sí | |
-| Orientación  |       | Estado de la dirección del dispositivo. | Sí | |
-| Proximidad   |       | Distancia del dispositivo a la cara/manos. | Sí | |
-| Temperatura  |       | No detectado. | No | |
-| Giroscopio   |       | Mide 6 direcciones al mismo tiempo (Posición 3D). | Sí | |
-| Sonido       |       | Intensidad de sonido alrededor. | Sí | |
-| Magnetico    |       | Campos magneticos. | Sí | |
-| Presión      |       | No detectado. | No | |
+| Acelerometro | ![](icons/acelerometro.jpg) | Dirección del dispositivo. | Sí | ![](acelerometro.jpg) |
+| Luz          | ![](icons/luz.jpg) | Intensidad de la luz en el ambiente. | Sí | ![](sensor-luz-alta.jpg) |
+| Orientación  | ![](icons/orientacion.jpg) | Estado de la dirección del dispositivo. | Sí | ![](orientacion.jpg) |
+| Proximidad   | ![](icons/proximidad.jpg) | Distancia del dispositivo a la cara/manos. | Sí | ![](proximidad-lejos.jpg) |
+| Temperatura  | ![](icons/temperatura.jpg) | No detectado. | No | No detectado. |
+| Giroscopio   | ![](icons/giroscopio.jpg) | Mide 6 direcciones al mismo tiempo (Posición 3D). | Sí | ![](giroscopio.jpg) |
+| Sonido       | ![](icons/sonido.jpg) | Intensidad de sonido alrededor. | Sí | ![](volumen-alto.jpg) |
+| Magnetico    | ![](icons/magnetico.jpg) | Campos magneticos. | Sí | ![](magnetico-alto.jpg) |
+| Presión      | ![](icons/presion.jpg) | No detectado. | No | No detectado. |
 
 ## Referencias
 
