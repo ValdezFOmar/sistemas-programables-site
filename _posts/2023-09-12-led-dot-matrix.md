@@ -3,7 +3,7 @@ title: Led Dot Matrix (MAX7219)
 author: omar
 date: 2023-09-12 05:00:00 -0800
 categories: [Presentación]
-tags: [sensores,raspberry pi]     # TAG names should always be lowercase
+tags: [sensores,raspberry pi,micropython]     # TAG names should always be lowercase
 img_path: /assets/img/led-matrix/
 ---
 
