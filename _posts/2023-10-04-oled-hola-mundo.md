@@ -9,7 +9,7 @@ img_path: /assets/img/oled-hola-mundo/
 
 ## Resultados de la Practica
 
-![Display oled mostrando el mensaje "Hola Mundo!"]()
+![Display oled mostrando el mensaje "Hola Mundo!"](practica.jpg)
 
 ## Código en Micropython
 

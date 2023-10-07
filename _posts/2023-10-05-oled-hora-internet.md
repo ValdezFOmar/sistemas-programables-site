@@ -9,7 +9,7 @@ img_path: /assets/img/oled-hora-internet/
 
 ## Resultados de la practica
 
-![Display monstrando la hora actual de Tijuana]()
+![Display monstrando la hora actual de Tijuana](practica.jpg)
 
 ## Código en Micropython
 
